@@ -13,8 +13,8 @@ class Client:
         asyncio.set_event_loop(loop)
     
     async def event_loop(self):
+        server = get_client_stub(self.pri_port)
         while True: # request IDs from the server
-            server = get_client_stub(self.pri_port)
             self.log("Requesting ID from primary server")
             id = await server.call('rpc_getID')
             if id == None:
@@ -23,6 +23,7 @@ class Client:
                     break
                 self.pri_port = self.hb_port
                 self.hb_port = None
+                server = get_client_stub(self.pri_port)
             else:
                 self.log("Received ID " + str(id))
             asyncio.sleep(0.001)
