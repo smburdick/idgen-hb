@@ -1,4 +1,4 @@
-# idgen-hb (IDGenerator with a Heartbeat)
+# idgen-hb
 ## System design
 The system comprises 3 processes: a client, a primary server, and a heartbeat (backup) server).
 * Primary: generates a ID and returns it upon request, and saves that ID to a file.
